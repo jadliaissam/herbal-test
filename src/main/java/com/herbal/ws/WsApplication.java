@@ -15,6 +15,18 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 import java.util.Collections;
 
+import com.zaxxer.hikari.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
+import javax.sql.DataSource;
+
+
+
+
+
+
+
+
 @SpringBootApplication
 public class WsApplication extends SpringBootServletInitializer {
 
@@ -30,6 +42,29 @@ public class WsApplication extends SpringBootServletInitializer {
     public SpringApplicationContext springApplicationContext() {
         return new SpringApplicationContext();
     }
+
+
+
+
+
+    @Configuration
+    public class DatabaseConfig {
+
+     @Value("${spring.datasource.url}")
+    private String dbUrl;
+
+    @Bean
+    public DataSource dataSource() {
+      HikariConfig config = new HikariConfig();
+      config.setJdbcUrl(dbUrl);
+      return new HikariDataSource(config);
+  }
+}
+
+
+
+
+
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
