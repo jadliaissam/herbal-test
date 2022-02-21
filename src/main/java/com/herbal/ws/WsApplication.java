@@ -28,6 +28,7 @@ import javax.sql.DataSource;
 
 
 @SpringBootApplication
+@EnableAutoConfiguration
 public class WsApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
